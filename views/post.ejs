@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <% include menu %>
+    <h1><%= title %></h1>
+    <p>fill in the form below to add a new post</p>
+    <% include messages %>
+    <form class="" action="/post" method="post">
+      <input type="text" name="title" value="" placeholder="title">
+      <textarea name="body" rows="8" cols="80" placeholder="body"></textarea>
+      <input type="submit" name="" value="post">
+    </form>
+  </body>
+</html>

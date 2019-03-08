@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+  </head>
+  <body>
+    <% include menu %>
+    <h1><%= title %></h1>
+    <p>fill in the form below to sign in</p>
+    <% include messages %>
+    <form class="" action="/login" method="post">
+      <input type="text" name="name" value="" placeholder="username">
+      <input type="password" name="pass" value="" placeholder="password">
+      <input type="submit" name="" value="login">
+    </form>
+  </body>
+</html>
