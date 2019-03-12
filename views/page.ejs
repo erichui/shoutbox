@@ -3,6 +3,11 @@
     <% if(page.number > 1) { %>
       <a href="/?page=<%= page.number -1 %>">Prev</a>
     <% } %>
-    if(page.number < page.count)
+    <% if(page.number < page.count) { %>
+      <% if(page.number > 1) { %>
+        &nbsp;&nbsp;
+      <% } %>
+      <a href="/?page=<%= page.number + 1 %>">Next</a>
+    <% } %>
   <% } %>
 </div>
