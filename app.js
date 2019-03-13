@@ -13,9 +13,11 @@ const login = require('./routes/login')
 const logout = require('./routes/logout')
 const entries = require('./routes/entries')
 const post = require('./routes/post')
+const api = require('./reoutes/api')
 
 const messages = require('./lib/messages')
 const user = require('./lib/middleware/user')
+
 
 
 var app = express();
@@ -40,6 +42,7 @@ app.use(messages)
 
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/api', api.auth)
 app.use(user)
 app.use('/', entries);
 app.use('/users', users);

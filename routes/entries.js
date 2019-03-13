@@ -4,7 +4,7 @@ const Entry = require('../lib/entry')
 const page = require('../lib/middleware/page')
 
 router.get('/',
-  page(Entry.count, 5),
+  page(Entry.count, 2),
   (req, res, next) => {
     const {
       from = 0,
