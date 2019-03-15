@@ -2,6 +2,9 @@ const express = require('express')
 const router = express.Router()
 const basicAuth = require('basic-auth')
 const User = require('../lib/user')
+const Entry = require('../lib/entry')
+const validate = require('../lib/middleware/validate')
+const page = require('../lib/middleware/page')
 
 
 router.get('/', (req, res, next) => {
@@ -32,13 +35,44 @@ router.get('/user/:id', (req, res, next) => {
   })
 })
 
-router.post('/entry', (req, res, next) => {
+router.post('/entry',
+  validate.required('title'),
+  validate.lengthAbove('title', 4),
+  (req, res, next) => {
+    // 登陆的验证 否则res.locals.user为空 会报错
+    const {
+      title,
+      body
+    } = req.body
+    const entry = new Entry({
+      username: res.locals.user.name,
+      title,
+      body
+    })
+    entry.save(err => {
+      if(err) return next(err)
+      if(req.remoteUser) {
+        res.json({ message: 'entry added'})
+      } else {
+        res.redirect('/')
+      }
+    })
+  }
+)
 
-})
-
-router.get('/entries/:page?', (req, res, next) => {
-
-})
+router.get('/entries/:page?',
+  page(Entry.count),
+  (req, res, next) => {
+    const {
+      from = 0,
+      to = -1
+    } = req.page || {}
+    Entry.getRange(from, to, (err, entries) => {
+      if(err) return next(err)
+      res.json(entries)
+    })
+  }
+)
 
 
 

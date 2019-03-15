@@ -15,6 +15,8 @@ const entries = require('./routes/entries')
 const post = require('./routes/post')
 const api = require('./routes/api')
 
+const notFound = require('./routes/404')
+
 const messages = require('./lib/messages')
 const user = require('./lib/middleware/user')
 
@@ -50,6 +52,7 @@ app.use('/register', register)
 app.use('/login', login)
 app.use('/logout', logout)
 app.use('/post', post)
+app.use(notFound)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
