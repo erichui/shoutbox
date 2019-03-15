@@ -13,7 +13,7 @@ const login = require('./routes/login')
 const logout = require('./routes/logout')
 const entries = require('./routes/entries')
 const post = require('./routes/post')
-const api = require('./reoutes/api')
+const api = require('./routes/api')
 
 const messages = require('./lib/messages')
 const user = require('./lib/middleware/user')
@@ -42,7 +42,7 @@ app.use(messages)
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api', api.auth)
+app.use('/api', api)
 app.use(user)
 app.use('/', entries);
 app.use('/users', users);
